@@ -125,7 +125,12 @@ WidgetPrivate::WidgetPrivate(Widget* q):
     connect(stop,  &QPushButton::clicked, this, &WidgetPrivate::stopGame);
 }
 
-WidgetPrivate::~WidgetPrivate() = default;
+WidgetPrivate::~WidgetPrivate()
+{
+    for (const auto& wave: waves) {
+        killTimer(wave.first);
+    }
+}
 
 void WidgetPrivate::startGame()
 {
